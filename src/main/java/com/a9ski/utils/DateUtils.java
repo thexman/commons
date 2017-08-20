@@ -742,4 +742,18 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 		sb.append(cal.get(Calendar.YEAR));
 		return sb.toString();
 	}
+
+	/**
+	 * Returns a default value if the object passed is {@code null}.
+	 *
+	 * @param value
+	 *            the value to test, may be {@code null}
+	 * @param defaultValue
+	 *            the default value to return, may be {@code null}
+	 * @return value if it is not {@code null}, defaultValue otherwise
+	 */
+	protected Date defaultDate(final Date value, final Date defaultValue) {
+		return (value != null ? value : defaultValue);
+	}
+
 }

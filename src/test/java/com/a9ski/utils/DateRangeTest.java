@@ -24,6 +24,7 @@ public class DateRangeTest {
 		assertEquals(new DateRange(d1, maxDate()), new DateRange(d1, null).normalize());
 		assertEquals(new DateRange(minDate(), d2), new DateRange(null, d2).normalize());
 		assertEquals(new DateRange(d1, d2), new DateRange(d2, d1).normalize());
+		assertEquals(new DateRange(d1, d2).hashCode(), new DateRange(d2, d1).normalize().hashCode());
 	}
 
 	@Test
@@ -56,8 +57,8 @@ public class DateRangeTest {
 		final Date d1 = new Date(0L);
 		final Date d2 = new Date(1L);
 
-		assertTrue(d1 == DateRange.defaultDate(d1, d2));
-		assertTrue(d2 == DateRange.defaultDate(null, d2));
+		assertTrue(d1 == new DateRange().defaultValue(d1, d2));
+		assertTrue(d2 == new DateRange().defaultValue(null, d2));
 	}
 
 	@Test
@@ -72,6 +73,7 @@ public class DateRangeTest {
 		assertFalse(new DateRange(d3, d1).contains(d4));
 		assertFalse(new DateRange(null, d3).contains(d4));
 		assertFalse(new DateRange(d2, null).contains(d1));
+		assertFalse(new DateRange(d2, null).contains(null));
 	}
 
 	@Test
@@ -84,6 +86,21 @@ public class DateRangeTest {
 		assertEquals(24 * 60, dr.durationInMinutes());
 		assertEquals(24 * 60 * 60, dr.durationInSeconds());
 		assertEquals(24 * 60 * 60 * 1000, dr.durationInMilliseconds());
+	}
+
+	@Test
+	public void testLongRange() throws Exception {
+		final Range<Long> lr = Range.newLongRange(1L, 42L);
+		assertTrue(lr.contains(20L));
+		assertFalse(lr.contains(0L));
+		assertFalse(lr.contains(43L));
+	}
+
+	@Test
+	public void testStringRange() throws Exception {
+		final Range<String> r = Range.newRange("a", "z");
+		assertTrue(r.contains("qwerty"));
+		assertFalse(r.contains("1"));
 	}
 
 }

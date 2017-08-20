@@ -19,10 +19,14 @@ import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.Set;
 import java.util.SortedMap;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class ExtCollectionUtils {
 
@@ -1141,4 +1145,32 @@ public class ExtCollectionUtils {
 
 		return list;
 	}
+
+	/**
+	 * Creates a stream from {@link Iterable}
+	 *
+	 * @param iterable
+	 *            the iterable to be converted to stream
+	 * @return stream
+	 */
+	public static <T> Stream<T> stream(final Iterable<T> iterable) {
+		return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterable.iterator(), Spliterator.ORDERED), false);
+	}
+
+	/**
+	 * Sort a list
+	 *
+	 * @param list
+	 *            the list to be sorted
+	 * @param cmp
+	 *            comparator used to compare collection elements
+	 * @return the sorted list. This is the same reference as the parameter <tt>list</tt>
+	 */
+	public static <V, C extends List<V>> C sort(final C list, final Comparator<V> cmp) {
+		if (list != null) {
+			list.sort(cmp);
+		}
+		return list;
+	}
+
 }

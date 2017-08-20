@@ -2,6 +2,8 @@ package com.a9ski.utils;
 
 import java.util.Date;
 
+import org.apache.commons.collections4.comparators.ComparableComparator;
+
 /**
  *
  * Date range represents a period between two dates (start/end)
@@ -9,7 +11,7 @@ import java.util.Date;
  * @author Kiril Arabadzhiyski
  *
  */
-public class DateRange {
+public class DateRange extends Range<Date> {
 
 	public static final long MILLISECONDS_PER_DAY = 1 * 24 * 60 * 60 * 1000;
 	public static final long MILLISECONDS_PER_HOUR = 1 * 60 * 60 * 1000;
@@ -19,16 +21,12 @@ public class DateRange {
 	private static final Date MIN_DATE = new Date(0);
 	private static final Date MAX_DATE = new Date(Long.MAX_VALUE);
 
-	private Date start;
-	private Date end;
-
 	public DateRange() {
-		super();
+		super(MIN_DATE, MAX_DATE, new ComparableComparator<Date>());
 	}
 
 	public DateRange(final Date start, final Date end) {
-		setStart(start);
-		setEnd(end);
+		super(new ComparableComparator<Date>(), start, end, MIN_DATE, MAX_DATE);
 	}
 
 	/**
@@ -36,6 +34,7 @@ public class DateRange {
 	 *
 	 * @return start date
 	 */
+	@Override
 	public Date getStart() {
 		return DateUtils.copy(start);
 	}
@@ -46,6 +45,7 @@ public class DateRange {
 	 * @param start
 	 *            the date
 	 */
+	@Override
 	public void setStart(final Date start) {
 		this.start = DateUtils.copy(start);
 	}
@@ -55,6 +55,7 @@ public class DateRange {
 	 *
 	 * @return end date
 	 */
+	@Override
 	public Date getEnd() {
 		return DateUtils.copy(end);
 	}
@@ -65,6 +66,7 @@ public class DateRange {
 	 * @param end
 	 *            the date
 	 */
+	@Override
 	public void setEnd(final Date end) {
 		this.end = DateUtils.copy(end);
 	}
@@ -78,68 +80,12 @@ public class DateRange {
 	 *
 	 * @return a new normalized DateRange
 	 */
+	@Override
 	public DateRange normalize() {
 		if (start != null && end != null) {
 			return new DateRange(min(start, end), max(start, end));
 		} else {
-			return new DateRange(defaultDate(start, minDate()), defaultDate(end, maxDate()));
-		}
-	}
-
-	/**
-	 * Check if either start or end is set.
-	 *
-	 * @return false if start and end dates are null
-	 */
-	public boolean isEmpty() {
-		return start == null && end == null;
-	}
-
-	/**
-	 * Checks if this date range overlaps with provided date range
-	 *
-	 * @param dateRange
-	 *            the date range to be checked for overlapping
-	 * @return true if this date range overlaps with provided <tt>dateRange</tt>
-	 */
-	public boolean intersect(final DateRange dateRange) {
-		return DateRange.intersect(this, dateRange);
-	}
-
-	/**
-	 * Returns true if two periods of time has intersection.
-	 *
-	 * @param dateRange1
-	 *            first period
-	 * @param dateRange2
-	 *            second period
-	 * @return true if two intervals are overlapping
-	 */
-	public static boolean intersect(final DateRange dateRange1, final DateRange dateRange2) {
-		final DateRange d1 = dateRange1.normalize();
-		final DateRange d2 = dateRange2.normalize();
-
-		final Date s1 = d1.getStart();
-		final Date e1 = d1.getEnd();
-		final Date s2 = d2.getStart();
-		final Date e2 = d2.getEnd();
-
-		return !e1.before(s2) && !e2.before(s1); // (e1 >= s2) && (e2 >= s1)
-	}
-
-	private static Date min(final Date a, final Date b) {
-		if (a.before(b)) {
-			return a;
-		} else {
-			return b;
-		}
-	}
-
-	private static Date max(final Date a, final Date b) {
-		if (a.before(b)) {
-			return b;
-		} else {
-			return a;
+			return new DateRange(defaultValue(start, minDate()), defaultValue(end, maxDate()));
 		}
 	}
 
@@ -174,37 +120,6 @@ public class DateRange {
 		} else {
 			return null;
 		}
-	}
-
-	/**
-	 * Returns either d or <tt>defaultValue</tt> if d is null
-	 *
-	 * @param d
-	 *            the date to be retruned
-	 * @param defaultDate
-	 *            the value returned if <tt>d</tt> is null
-	 * @return <tt>d</tt> or <tt>defaultValue</tt> if <tt>d</tt> is null
-	 */
-	public static Date defaultDate(final Date d, final Date defaultDate) {
-		return (d != null ? d : defaultDate);
-	}
-
-	/**
-	 * Checks if x is contained in this date range.
-	 * <p>
-	 * If the date range start is null {@link #minDate()} is assumed. If the date range end is null {@link #maxDate()} is assumed
-	 *
-	 * @param x
-	 *            the date to be checked
-	 * @return true if x is contained in the date range
-	 */
-	public boolean contains(final Date x) {
-		if (x == null) {
-			return false;
-		}
-		final DateRange dr = normalize();
-
-		return !x.before(dr.getStart()) && !x.after(dr.getEnd());
 	}
 
 	/*
@@ -278,53 +193,4 @@ public class DateRange {
 			return (sign * (r.end.getTime() + 1 - r.start.getTime()) / period);
 		}
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((end == null) ? 0 : end.hashCode());
-		result = prime * result + ((start == null) ? 0 : start.hashCode());
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof DateRange)) {
-			return false;
-		}
-		final DateRange other = (DateRange) obj;
-		if (end == null) {
-			if (other.end != null) {
-				return false;
-			}
-		} else if (!end.equals(other.end)) {
-			return false;
-		}
-		if (start == null) {
-			if (other.start != null) {
-				return false;
-			}
-		} else if (!start.equals(other.start)) {
-			return false;
-		}
-		return true;
-	}
-
 }

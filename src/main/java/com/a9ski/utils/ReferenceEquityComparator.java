@@ -1,5 +1,12 @@
 package com.a9ski.utils;
 
+/**
+ * Implements {@link EquityComparator} based on reference check
+ * 
+ * @author Kiril Arabadzhiyski
+ *
+ * @param <O>
+ */
 public class ReferenceEquityComparator<O> implements EquityComparator<O> {
 
 	@Override
