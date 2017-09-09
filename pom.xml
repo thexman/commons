@@ -6,7 +6,7 @@
 	<packaging>jar</packaging>
 	<version>1.1-SNAPSHOT</version>
 	<name>commons</name>
-	<description>common utilities for dealing with Strings, IOStreams, Files, Collections, Dates, Reflections</description>
+	<description>Common utilities for dealing with Strings, IOStreams, Files, Collections, Dates, Reflections</description>
 	
 	<url>https://github.com/thexman/commons</url>
 	<inceptionYear>2017</inceptionYear>
