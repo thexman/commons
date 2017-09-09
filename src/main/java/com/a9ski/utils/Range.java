@@ -1,3 +1,22 @@
+/*
+ * #%L
+ * Commons utilities
+ * %%
+ * Copyright (C) 2017 Kiril Arabadzhiyski
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package com.a9ski.utils;
 
 import java.util.Comparator;
@@ -10,6 +29,7 @@ import org.apache.commons.collections4.comparators.ComparableComparator;
  * @author Kiril Arabadzhiyski
  *
  * @param <T>
+ *            value type
  */
 public class Range<T> {
 	protected T start;
@@ -20,12 +40,12 @@ public class Range<T> {
 	protected final T maxValue;
 
 	/**
-	 * Creates a new range with provided <tt>T></tt>'s absolute minValue, maxValue and comparator
+	 * Creates a new range with provided <tt>T</tt>'s absolute minValue, maxValue and comparator
 	 *
 	 * @param minValue
-	 *            the <tt>T></tt> absolute min value
+	 *            the <tt>T</tt> absolute min value
 	 * @param maxValue
-	 *            the <tt>T></tt> absolute max value
+	 *            the <tt>T</tt> absolute max value
 	 * @param cmp
 	 *            the comparator
 	 */
@@ -160,7 +180,11 @@ public class Range<T> {
 	 *            first range
 	 * @param range2
 	 *            second range
+	 * @param cmp
+	 *            value comparator
 	 * @return true if two ranges are overlapping
+	 * @param <T>
+	 *            type of the range
 	 */
 	public static <T> boolean intersect(final Range<T> range1, final Range<T> range2, final Comparator<T> cmp) {
 		if (range1 != null && range2 != null) {
@@ -183,7 +207,7 @@ public class Range<T> {
 	/**
 	 * Checks if x is contained in this range.
 	 * <p>
-	 * If the range <tt>start</tt> is null {@link #minValue()} is assumed. If the range <tt>end</tt> is null {@link #maxValue()} is assumed
+	 * If the range <tt>start</tt> is null {@link #getMinValue()} is assumed. If the range <tt>end</tt> is null {@link #getMaxValue()} is assumed
 	 *
 	 * @param x
 	 *            the value to be checked of being contained in the range

@@ -1,3 +1,22 @@
+/*
+ * #%L
+ * Commons utilities
+ * %%
+ * Copyright (C) 2017 Kiril Arabadzhiyski
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package com.a9ski.utils;
 
 import java.lang.reflect.Array;
@@ -33,6 +52,8 @@ public class ExtCollectionUtils {
 	/**
 	 * Creates a new equity comparator that uses {@link java.util.Objects#equals}
 	 *
+	 * @param <V>
+	 *            collection value type
 	 * @return new equity comparator that uses {@link java.util.Objects#equals}
 	 */
 	public static <V> EquityComparator<V> equalsEquityComparator() {
@@ -44,6 +65,10 @@ public class ExtCollectionUtils {
 	 *
 	 * @param collection
 	 *            the collection to be returned
+	 * @param <V>
+	 *            collection value type
+	 * @param <V>
+	 *            collection value type
 	 * @return the collection or a newly created ArrayList, if <tt>collection</tt> is null
 	 */
 	public static <V> Collection<V> defaultCollection(final Collection<V> collection) {
@@ -51,10 +76,16 @@ public class ExtCollectionUtils {
 	}
 
 	/**
-	 * Returns either the original <tt>collection</tt> or the a newly created ArrayList if original <tt>collection</tt> is null
+	 * Returns either the original <tt>collection</tt> or the <tt>defaultCollection</tt> if original <tt>collection</tt> is null
 	 *
 	 * @param collection
 	 *            the collection to be returned
+	 * @param defaultCollection
+	 *            default colletion to be returned if original <tt>collection</tt> is null
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return the collection or a newly created ArrayList, if <tt>collection</tt> is null
 	 */
 	public static <V, C extends Collection<V>> C defaultCollection(final C collection, final C defaultCollection) {
@@ -66,6 +97,9 @@ public class ExtCollectionUtils {
 	 *
 	 * @param list
 	 *            the list to be returned
+	 * @param <D>
+	 *            collection value type
+	 *
 	 * @return the list or a newly created ArrayList, if <tt>list</tt> is null
 	 */
 	public static <D> ArrayList<D> defaultArrayList(final ArrayList<D> list) {
@@ -77,6 +111,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param list
 	 *            the list to be returned
+	 * @param <D>
+	 *            collection value type
 	 * @return the list or a newly created ArrayList, if <tt>list</tt> is null
 	 */
 	public static <D> LinkedList<D> defaultLinkedList(final LinkedList<D> list) {
@@ -88,6 +124,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param list
 	 *            the list to be returned
+	 * @param <D>
+	 *            collection value type
 	 * @return the list or a newly created ArrayList, if <tt>list</tt> is null
 	 */
 	public static <D> List<D> defaultList(final List<D> list) {
@@ -99,6 +137,10 @@ public class ExtCollectionUtils {
 	 *
 	 * @param map
 	 *            the map to be returned
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return the map or a newly created HashMap, if <tt>map</tt> is null
 	 */
 	public static <K, V> Map<K, V> defaultMap(final Map<K, V> map) {
@@ -110,6 +152,10 @@ public class ExtCollectionUtils {
 	 *
 	 * @param map
 	 *            the map to be returned
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return the map or a newly created TreeMap, if <tt>map</tt> is null
 	 */
 	public static <K, V> TreeMap<K, V> defaultTreeMap(final TreeMap<K, V> map) {
@@ -121,6 +167,10 @@ public class ExtCollectionUtils {
 	 *
 	 * @param map
 	 *            the map to be returned
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return the map or a newly created LinkedHashMap, if <tt>map</tt> is null
 	 */
 	public static <K, V> LinkedHashMap<K, V> defaultLinkedHashMap(final LinkedHashMap<K, V> map) {
@@ -132,6 +182,10 @@ public class ExtCollectionUtils {
 	 *
 	 * @param map
 	 *            the map to be returned
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return the map or a newly created HashMap, if <tt>map</tt> is null
 	 */
 	public static <K, V> HashMap<K, V> defaultHashMap(final HashMap<K, V> map) {
@@ -143,6 +197,10 @@ public class ExtCollectionUtils {
 	 *
 	 * @param collection
 	 *            the collection to be cleared
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return the <tt>collection</tt>
 	 */
 	public <V, C extends Collection<V>> C clear(final C collection) {
@@ -159,6 +217,10 @@ public class ExtCollectionUtils {
 	 *            the map of collections
 	 * @param collectionFactory
 	 *            the new collection factory
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return a new collection that contains all non null values of the map
 	 */
 	public static <V, C extends Collection<V>> C combineValues(final Map<?, ? extends Collection<V>> map, final Supplier<C> collectionFactory) {
@@ -176,6 +238,10 @@ public class ExtCollectionUtils {
 	 *            the collection-of-collections
 	 * @param collectionFactory
 	 *            the new collection factory
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return a new collection that contains all non null values of collection-of-collections
 	 */
 	public static <V, C extends Collection<V>> C combine(final Collection<? extends Collection<V>> collection, final Supplier<C> collectionFactory) {
@@ -191,6 +257,10 @@ public class ExtCollectionUtils {
 	 *            the new collection factory
 	 * @param collections
 	 *            the collection-of-collections
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return a new collection that contains all non null values of collection-of-collections
 	 */
 	@SafeVarargs
@@ -209,6 +279,10 @@ public class ExtCollectionUtils {
 	 *            the map
 	 * @param newNullValue
 	 *            the new value to be set
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 */
 	public static <K, V> void replaceNullValuesWith(final Map<K, V> map, final V newNullValue) {
 		//@formatter:off
@@ -262,6 +336,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param collection
 	 *            the collection
+	 * @param <V>
+	 *            collection value type
 	 * @return Gets the first element. Returns null if the collection is empty or null
 	 */
 	public static <V> V get0(final Collection<V> collection) {
@@ -280,6 +356,8 @@ public class ExtCollectionUtils {
 	 *            the elementh index
 	 * @param defaultValue
 	 *            the default value if the elmenth is null or the index doesn't exists
+	 * @param <V>
+	 *            collection value type
 	 * @return Gets the Nth element. Returns the <tt>defaultValue</tt> if the list is empty OR the element doesn't exists or is null
 	 */
 	public static <V> V getN(final Collection<V> collection, final int index, final V defaultValue) {
@@ -310,6 +388,8 @@ public class ExtCollectionUtils {
 	 *            the elementh index
 	 * @param value
 	 *            the value of the elementh
+	 * @param <V>
+	 *            collection value type
 	 * @param defaultValue
 	 *            the default value for the elements added between list <tt>size</tt> and <tt>index</tt>
 	 */
@@ -329,6 +409,8 @@ public class ExtCollectionUtils {
 	 *            the list
 	 * @param element
 	 *            element to be added
+	 * @param <V>
+	 *            collection value type
 	 */
 	public static <V> void set0(final List<V> list, final V element) {
 		if (list != null) {
@@ -341,6 +423,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param cmp
 	 *            the comparator for the newly created TreeSets
+	 * @param <V>
+	 *            collection value type
 	 * @return factory that creates TreeSets with give comparator
 	 */
 	public static <V> Supplier<TreeSet<V>> treeSetSupplier(final Comparator<V> cmp) {
@@ -356,6 +440,10 @@ public class ExtCollectionUtils {
 	 *            the new collection factory
 	 * @param emptyCollection
 	 *            the collection returned if <tt>values</tt> is null
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return a new collection populated with the <tt>values</tt> or <tt>emptyCollection</tt> if <tt>values</tt> is null
 	 */
 	public static <V, C extends Collection<V>> C collection(final Collection<V> values, final Supplier<C> collectionFactory, final C emptyCollection) {
@@ -375,6 +463,10 @@ public class ExtCollectionUtils {
 	 *            the initial values
 	 * @param collectionFactory
 	 *            the new collection factory
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return a new collection populated with the <tt>values</tt>
 	 */
 	public static <V, C extends Collection<V>> C collection(final Collection<V> values, final Supplier<C> collectionFactory) {
@@ -388,6 +480,10 @@ public class ExtCollectionUtils {
 	 *            the new collection factory
 	 * @param values
 	 *            the initial values
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return a new collection populated with the <tt>values</tt>
 	 */
 	@SafeVarargs
@@ -408,6 +504,10 @@ public class ExtCollectionUtils {
 	 *            the initial values
 	 * @param emptyCollection
 	 *            the collection returned if <tt>values</tt> is null
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return a new collection populated with the <tt>values</tt> or <tt>emptyCollection</tt> if <tt>values</tt> is null
 	 */
 	@SafeVarargs
@@ -424,6 +524,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param items
 	 *            the values of the set
+	 * @param <V>
+	 *            collection value type
 	 * @return HashSet initialized with <tt>items</tt>
 	 */
 	@SafeVarargs
@@ -436,6 +538,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param items
 	 *            the values of the set
+	 * @param <V>
+	 *            collection value type
 	 * @return HashSet initialized with <tt>items</tt>
 	 */
 	public static <V> Set<V> toSet(final Collection<V> items) {
@@ -447,6 +551,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param items
 	 *            the values of the set
+	 * @param <V>
+	 *            collection value type
 	 * @return ArrayList initialized with <tt>items</tt>
 	 */
 	@SafeVarargs
@@ -459,6 +565,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param items
 	 *            the values of the set
+	 * @param <V>
+	 *            collection value type
 	 * @return HashSet initialized with <tt>items</tt>
 	 */
 	public static <V> List<V> toList(final Collection<V> items) {
@@ -518,14 +626,18 @@ public class ExtCollectionUtils {
 	}
 
 	/**
-	 * Returns the index of the <tt><element</tt>
+	 * Returns the index of the <tt>element</tt>
 	 *
 	 * @param list
 	 *            the list to be checked
 	 * @param element
 	 *            element searched for
+	 * @param startIndex
+	 *            search start index
 	 * @param comparator
 	 *            comparator used to compare equity
+	 * @param <D>
+	 *            collection value type
 	 * @return the index of the element or -1 if there is no such element
 	 */
 	public static <D> int indexOf(final Collection<D> list, final D element, final int startIndex, final EquityComparator<D> comparator) {
@@ -546,12 +658,16 @@ public class ExtCollectionUtils {
 	}
 
 	/**
-	 * Returns the index of the <tt><element</tt> using {@link ExtCollectionUtils#equalsEquityComparator()}
+	 * Returns the index of the <tt>element</tt> using {@link ExtCollectionUtils#equalsEquityComparator()}
 	 *
 	 * @param list
 	 *            the list to be searched
 	 * @param element
 	 *            element searched for
+	 * @param startIndex
+	 *            search starting index
+	 * @param <D>
+	 *            collection value type
 	 * @return the index of the element or -1 if there is no such element
 	 */
 	public static <D> int indexOf(final Collection<D> list, final D element, final int startIndex) {
@@ -559,15 +675,19 @@ public class ExtCollectionUtils {
 	}
 
 	/**
-	 * Returns a true if <tt>list</tt> contains <tt><element</tt>
+	 * Returns a true if <tt>list</tt> contains <tt>element</tt>
 	 *
 	 * @param list
 	 *            the list to be checked
 	 * @param element
 	 *            element searched for
+	 * @param startIndex
+	 *            search starting index
 	 * @param comparator
 	 *            comparator used to compare equity
-	 * @return true if <tt>list</tt> contains <tt><element</tt>
+	 * @param <D>
+	 *            collection value type
+	 * @return true if <tt>list</tt> contains <tt>element</tt>
 	 */
 	public static <D> List<Integer> allIndexesOf(final Collection<D> list, final D element, final int startIndex, final EquityComparator<D> comparator) {
 		final List<Integer> indexes = new ArrayList<>();
@@ -579,22 +699,24 @@ public class ExtCollectionUtils {
 	}
 
 	/**
-	 * Returns a true if <tt>list</tt> contains <tt><element</tt>
+	 * Returns a true if <tt>list</tt> contains <tt>element</tt>
 	 *
 	 * @param list
 	 *            the list to be checked
 	 * @param element
 	 *            element searched for
-	 * @param comparator
-	 *            comparator used to compare equity
-	 * @return true if <tt>list</tt> contains <tt><element</tt>
+	 * @param startIndex
+	 *            search starting index
+	 * @param <D>
+	 *            collection value type
+	 * @return true if <tt>list</tt> contains <tt>element</tt>
 	 */
 	public static <D> List<Integer> allIndexesOf(final Collection<D> list, final D element, final int startIndex) {
 		return allIndexesOf(list, element, startIndex, equalsEquityComparator());
 	}
 
 	/**
-	 * Returns a true if <tt>list</tt> contains <tt><element</tt>
+	 * Returns a true if <tt>list</tt> contains <tt>element</tt>
 	 *
 	 * @param list
 	 *            the list to be checked
@@ -602,35 +724,41 @@ public class ExtCollectionUtils {
 	 *            element to be searched for
 	 * @param comparator
 	 *            comparator used to compare equity
-	 * @return true if <tt>list</tt> contains <tt><element</tt>
+	 * @param <D>
+	 *            collection value type
+	 * @return true if <tt>list</tt> contains <tt>element</tt>
 	 */
 	public static <D> boolean contains(final Collection<D> list, final D element, final EquityComparator<D> comparator) {
 		return indexOf(list, element, 0, comparator) != -1;
 	}
 
 	/**
-	 * Returns a true if <tt>list</tt> contains <tt><element</tt> using {@link ExtCollectionUtils#equalsEquityComparator()}
+	 * Returns a true if <tt>list</tt> contains <tt>element</tt> using {@link ExtCollectionUtils#equalsEquityComparator()}
 	 *
 	 * @param list
 	 *            the list to be checked
 	 * @param element
 	 *            element to be searched for
-	 * @return true if <tt>list</tt> contains <tt><element</tt>
+	 * @param <D>
+	 *            collection value type
+	 * @return true if <tt>list</tt> contains <tt>element</tt>
 	 */
 	public static <D> boolean contains(final Collection<D> list, final D element) {
 		return contains(list, element, equalsEquityComparator());
 	}
 
 	/**
-	 * Returns the index of the <tt><element</tt>
+	 * Removes the element with <tt>index</tt>
 	 *
 	 * @param list
-	 *            the list to be checked
-	 * @param element
-	 *            element searched for
+	 *            the list to be modified
+	 * @param index
+	 *            element index to be removed
 	 * @param comparator
 	 *            comparator used to compare equity
-	 * @return the index of the element or -1 if there is no such element
+	 * @param <D>
+	 *            collection value type
+	 * @return the the previous value of the element or null if there no such element
 	 */
 	public static <D> D removeIndex(final Collection<D> list, final int index, final EquityComparator<D> comparator) {
 		final Iterator<D> it = defaultCollection(list).iterator();
@@ -655,6 +783,10 @@ public class ExtCollectionUtils {
 	 *            the map
 	 * @param keys
 	 *            collection of keys
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return list containing map values of each key
 	 */
 	public static <K, V> List<V> getMapValues(final Map<K, V> map, final Collection<K> keys) {
@@ -672,6 +804,10 @@ public class ExtCollectionUtils {
 	 *            the map
 	 * @param keys
 	 *            collection of keys
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return list containing map values of each key
 	 */
 	@SafeVarargs
@@ -688,8 +824,13 @@ public class ExtCollectionUtils {
 	 *            the old value
 	 * @param newValue
 	 *            the new value
-	 * @return
-	 * @return returns the provided map <tt>map</tt>
+	 * @param comparator
+	 *            comparator used to compare values
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
+	 * @return the provided map <tt>map</tt>
 	 */
 	public static <K, V> Map<K, V> changeMapValues(final Map<K, V> map, final V oldValue, final V newValue, final EquityComparator<V> comparator) {
 		if (isNotEmpty(map)) {
@@ -707,8 +848,11 @@ public class ExtCollectionUtils {
 	 *            the old value
 	 * @param newValue
 	 *            the new value
-	 * @return
-	 * @return returns the provided map <tt>map</tt>
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
+	 * @return the provided map <tt>map</tt>
 	 */
 	public static <K, V> Map<K, V> changeMapValues(final Map<K, V> map, final V oldValue, final V newValue) {
 		return changeMapValues(map, oldValue, newValue, equalsEquityComparator());
@@ -723,6 +867,10 @@ public class ExtCollectionUtils {
 	 *            the values to be removed
 	 * @param comparator
 	 *            equity comparator
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return the provided map <tt>map</tt>
 	 */
 	public static <K, V> Map<K, V> removeMapValues(final Map<K, V> map, final Collection<V> values, final EquityComparator<V> comparator) {
@@ -744,6 +892,10 @@ public class ExtCollectionUtils {
 	 *            the map
 	 * @param values
 	 *            the values to be removed
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return the provided map <tt>map</tt>
 	 */
 	public static <K, V> Map<K, V> removeMapValues(final Map<K, V> map, final Collection<V> values) {
@@ -757,6 +909,10 @@ public class ExtCollectionUtils {
 	 *            the map
 	 * @param values
 	 *            the values to be removed
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return the provided map <tt>map</tt>
 	 */
 	@SafeVarargs
@@ -773,6 +929,10 @@ public class ExtCollectionUtils {
 	 *            source collection
 	 * @param collectionFactory
 	 *            collection factory to be used when <tt>dest</tt> is null. Could be null, then no collection will be created
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return <tt>dest</tt> if <tt>dest</tt> is not null OR newly created collection if <tt>collectionFactory</tt> is not null. Returns null otherwise (dest is null and collectionFactory is null)
 	 */
 	public static <V, C extends Collection<V>> C addAll(C dest, final Collection<V> src, final Supplier<C> collectionFactory) {
@@ -794,6 +954,8 @@ public class ExtCollectionUtils {
 	 *            the collection to subtract (may be null, then a new list equals to <tt><i>a</i></tt> is returned)
 	 * @param comparator
 	 *            comparator used to check for equity
+	 * @param <D>
+	 *            collection value type
 	 * @return a new collection with the results
 	 * @see Collection#removeAll
 	 */
@@ -814,6 +976,8 @@ public class ExtCollectionUtils {
 	 * @param b
 	 *            the collection to subtract (may be null, then a new list equals to <tt><i>a</i></tt> is returned)
 	 * @return a new collection with the results
+	 * @param <D>
+	 *            collection value type
 	 * @see Collection#removeAll
 	 */
 	public static <D> List<D> subtract(final Collection<D> a, final Collection<D> b) {
@@ -829,6 +993,10 @@ public class ExtCollectionUtils {
 	 *            element to be removed
 	 * @param comparator
 	 *            equity comparator
+	 * @param <D>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return the <tt>collection</tt>
 	 */
 	public static <D, C extends Collection<D>> C removeAll(final C collection, final D element, final EquityComparator<D> comparator) {
@@ -846,6 +1014,10 @@ public class ExtCollectionUtils {
 	 *            collection
 	 * @param element
 	 *            element to be removed
+	 * @param <D>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return the <tt>collection</tt>
 	 */
 	public static <D, C extends Collection<D>> C removeAll(final C collection, final D element) {
@@ -861,6 +1033,10 @@ public class ExtCollectionUtils {
 	 *            elements to be removed
 	 * @param comparator
 	 *            equity comparator
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return <tt>dest</tt>
 	 */
 	public static <V, C extends Collection<V>> C removeAll(final C dest, final C elementsToRemove, final EquityComparator<V> comparator) {
@@ -879,6 +1055,10 @@ public class ExtCollectionUtils {
 	 *            destination where the elements are removed
 	 * @param elementsToRemove
 	 *            elements to be removed
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return <tt>dest</tt>
 	 */
 	public static <V, C extends Collection<V>> C removeAll(final C dest, final C elementsToRemove) {
@@ -894,6 +1074,12 @@ public class ExtCollectionUtils {
 	 *            the key
 	 * @param value
 	 *            the value
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
+	 * @param <M>
+	 *            map type
 	 * @return the map
 	 */
 	public static <K, V, M extends Map<K, V>> M put(final M map, final K key, final V value) {
@@ -914,6 +1100,10 @@ public class ExtCollectionUtils {
 	 *            end index exclusive
 	 * @param collectionFactory
 	 *            collection factory used to create the returned collection
+	 * @param <V>
+	 *            collection value type
+	 * @param <C>
+	 *            collection type
 	 * @return a new collection containing the values between <tt>fromIndex</tt> (inclusive) and <tt>toIndex</tt> (exclusive).
 	 */
 	public static <V, C extends Collection<V>> C subCollection(final Collection<V> collection, final int fromIndex, final int toIndex, final Supplier<C> collectionFactory) {
@@ -937,6 +1127,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param list
 	 *            the list to be copied
+	 * @param <T>
+	 *            list values type
 	 * @return an ArrayList copied from the <tt>list</tt>
 	 */
 	public static <T> List<T> copy(final List<T> list) {
@@ -954,6 +1146,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param set
 	 *            the set to be copied
+	 * @param <T>
+	 *            collection value type
 	 * @return an HashSet copied from the <tt>set</tt>
 	 */
 	public static <T> Set<T> copy(final Set<T> set) {
@@ -971,6 +1165,10 @@ public class ExtCollectionUtils {
 	 *
 	 * @param map
 	 *            the map to be copied
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return an HashMap copied from the <tt>map</tt>
 	 */
 	public static <K, V> Map<K, V> copy(final Map<K, V> map) {
@@ -1013,7 +1211,7 @@ public class ExtCollectionUtils {
 	 *
 	 * @param <T>
 	 *            the class of the objects in the set
-	 * @param sset
+	 * @param set
 	 *            the set for which an unmodifiable view is to be returned.
 	 * @return an unmodifiable view of the specified set.
 	 */
@@ -1104,6 +1302,8 @@ public class ExtCollectionUtils {
 	 *            second collection
 	 * @param comparator
 	 *            equity comparator used for element comparison
+	 * @param <V>
+	 *            collection values type
 	 * @return HasSet representing intersection between two collections
 	 */
 	public static <V> Set<V> intersect(final Collection<V> l1, final Collection<V> l2, final EquityComparator<V> comparator) {
@@ -1125,6 +1325,10 @@ public class ExtCollectionUtils {
 	 *            max size of the sub collections
 	 * @param collectionFactory
 	 *            collection factory used to create sub collections
+	 * @param <V>
+	 *            collection values type
+	 * @param <C>
+	 *            collection type
 	 * @return a list of collections, each collection having size <tt>maxSize</tt>. The last collection could contain less than <tt>maxSize</tt> elements
 	 */
 	public static <V, C extends Collection<V>> List<C> split(final Collection<V> collection, final int maxSize, final Supplier<C> collectionFactory) {
@@ -1151,6 +1355,8 @@ public class ExtCollectionUtils {
 	 *
 	 * @param iterable
 	 *            the iterable to be converted to stream
+	 * @param <T>
+	 *            elements type
 	 * @return stream
 	 */
 	public static <T> Stream<T> stream(final Iterable<T> iterable) {
@@ -1164,6 +1370,10 @@ public class ExtCollectionUtils {
 	 *            the list to be sorted
 	 * @param cmp
 	 *            comparator used to compare collection elements
+	 * @param <V>
+	 *            the collection value type
+	 * @param <C>
+	 *            the collection type
 	 * @return the sorted list. This is the same reference as the parameter <tt>list</tt>
 	 */
 	public static <V, C extends List<V>> C sort(final C list, final Comparator<V> cmp) {

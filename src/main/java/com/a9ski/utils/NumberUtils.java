@@ -1,3 +1,22 @@
+/*
+ * #%L
+ * Commons utilities
+ * %%
+ * Copyright (C) 2017 Kiril Arabadzhiyski
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package com.a9ski.utils;
 
 import java.util.Collection;
@@ -17,6 +36,8 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *            the value to test, may be {@code null}
 	 * @param defaultValue
 	 *            the default value to return, may be {@code null}
+	 * @param <N>
+	 *            number type
 	 * @return value if it is not {@code null}, defaultValue otherwise
 	 */
 	public static <N extends Number> N defaultValue(final N value, final N defaultValue) {
@@ -261,6 +282,8 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *            first number
 	 * @param b
 	 *            second number
+	 * @param <N>
+	 *            number type
 	 * @return the max value
 	 */
 	public static <N extends Number & Comparable<N>> N max(final N a, final N b) {
@@ -280,6 +303,8 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *            first number
 	 * @param b
 	 *            second number
+	 * @param <N>
+	 *            number type
 	 * @return the min value
 	 */
 	public static <N extends Number & Comparable<N>> N min(final N a, final N b) {
@@ -297,9 +322,11 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *
 	 * @param values
 	 *            the collection
+	 * @param <N>
+	 *            number type
 	 * @return the average: (values[0] + values[1] + ... values[N]) / N
 	 */
-	public static <T extends Number> double average(final Collection<T> values) {
+	public static <N extends Number> double average(final Collection<N> values) {
 		if (values != null) {
 			//@formatter:off
 			return values.stream()
@@ -347,8 +374,8 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *            number value
 	 * @return long value
 	 */
-	public static long toLongPrimitive(final int d) {
-		return d;
+	public static long toLongPrimitive(final int i) {
+		return i;
 	}
 
 	/**
@@ -481,6 +508,8 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *            the range start value.
 	 * @param b
 	 *            the range end value.
+	 * @param <N>
+	 *            number type
 	 * @return true if x is in the range of [a,b] (inclusive)
 	 */
 	public static <N extends Number & Comparable<N>> boolean isInRange(final N x, N a, N b) {
@@ -513,6 +542,8 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *            the range start value.
 	 * @param b
 	 *            the range end value.
+	 * @param <N>
+	 *            number type
 	 * @return true if x is not in the range of [a,b] (inclusive)
 	 */
 	public static <N extends Number & Comparable<N>> boolean isNotInRange(final N x, final N a, final N b) {
@@ -539,6 +570,8 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *            the first number
 	 * @param b
 	 *            the second number
+	 * @param <N>
+	 *            number type
 	 * @return true if a is equal to b
 	 */
 	public static <N extends Number & Comparable<N>> boolean equals(final N a, final N b) { // NOSONAR
@@ -565,6 +598,8 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 *            the first number
 	 * @param b
 	 *            the second number
+	 * @param <N>
+	 *            number type
 	 * @return true if a is not equal to b
 	 */
 	public static <N extends Number & Comparable<N>> boolean notEquals(final N a, final N b) {

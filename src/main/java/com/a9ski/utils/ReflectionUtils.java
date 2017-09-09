@@ -1,3 +1,22 @@
+/*
+ * #%L
+ * Commons utilities
+ * %%
+ * Copyright (C) 2017 Kiril Arabadzhiyski
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package com.a9ski.utils;
 
 import java.lang.annotation.Annotation;
@@ -301,6 +320,8 @@ public class ReflectionUtils {
 	 *
 	 * @param c
 	 *            the class whose fields are returned
+	 * @param annotation
+	 *            the annotation type
 	 * @return all fields of the class (includes public, protected, default (package) access, and private fields, including inherited fields)
 	 */
 	public static List<Field> getAllFieldsWithAnnotation(final Class<?> c, final Class<? extends Annotation> annotation) {
@@ -313,10 +334,10 @@ public class ReflectionUtils {
 	 * for <tt>List&lt;String&gt;</tt> the result will be <tt>String</tt>
 	 * <p>
 	 * <tt>
-	 * class MyClass {<br/>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;List&lt;Long&gt; myList;<br/>
-	 * };<br/>
-	 * System.out.println(ReflectionUtils.getCollectionGenericType(MyClass.getDeclaredField("myList").getGenericType()).getName());<br/>
+	 * class MyClass {<br>
+	 * &nbsp;&nbsp;&nbsp;&nbsp;List&lt;Long&gt; myList;<br>
+	 * };<br>
+	 * System.out.println(ReflectionUtils.getCollectionGenericType(MyClass.getDeclaredField("myList").getGenericType()).getName());<br>
 	 * </tt> will output the value <tt>java.lang.Long</tt>
 	 * </p>
 	 *
@@ -346,10 +367,10 @@ public class ReflectionUtils {
 	 * for <tt>List&lt;String&gt;</tt> the result will be <tt>String</tt>
 	 * <p>
 	 * <tt>
-	 * class MyClass {<br/>
-	 * &nbsp;&nbsp;&nbsp;&nbsp;List&lt;Long&gt; myList;<br/>
-	 * };<br/>
-	 * System.out.println(ReflectionUtils.getCollectionGenericType(MyClass.getDeclaredField("myList").getGenericType()).getName());<br/>
+	 * class MyClass {<br>
+	 * &nbsp;&nbsp;&nbsp;&nbsp;List&lt;Long&gt; myList;<br>
+	 * };<br>
+	 * System.out.println(ReflectionUtils.getCollectionGenericType(MyClass.getDeclaredField("myList").getGenericType()).getName());<br>
 	 * </tt> will output the value <tt>java.lang.Long</tt>
 	 * </p>
 	 *
@@ -426,8 +447,11 @@ public class ReflectionUtils {
 	 *            the new value of the field
 	 * @return true if the assign operation is successful
 	 * @throws IllegalAccessException
+	 *             thrown if an error occurs
 	 * @throws IllegalArgumentException
+	 *             thrown if an error occurs
 	 * @throws InvocationTargetException
+	 *             thrown if an error occurs
 	 */
 	public static boolean setFieldValueViaSetter(final Object object, final String fieldName, final Object value) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		final Method setter;
@@ -456,8 +480,11 @@ public class ReflectionUtils {
 	 *            the field name
 	 * @return true if the copy operation is successful
 	 * @throws IllegalAccessException
+	 *             thrown if an error occurs
 	 * @throws IllegalArgumentException
+	 *             thrown if an error occurs
 	 * @throws InvocationTargetException
+	 *             thrown if an error occurs
 	 */
 	public static boolean copyField(final Object src, final Object dst, final String fieldName) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		final Method getter = getGetter(src.getClass(), fieldName);
@@ -482,8 +509,11 @@ public class ReflectionUtils {
 	 *            the field name
 	 * @return the field value
 	 * @throws IllegalArgumentException
+	 *             thrown if an error occurs
 	 * @throws IllegalAccessException
+	 *             thrown if an error occurs
 	 * @throws InvocationTargetException
+	 *             thrown if an error occurs
 	 */
 	public static Object getFieldValue(final Object obj, final String fieldName) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		final Method getter = getGetter(obj.getClass(), fieldName);
@@ -574,13 +604,21 @@ public class ReflectionUtils {
 	 *
 	 * @param objectClass
 	 *            the object class
+	 * @param <T>
+	 *            object type
 	 * @return a new instance of <tt>objectClass</tt>
 	 * @throws NoSuchMethodException
+	 *             thrown if an error occurs
 	 * @throws SecurityException
+	 *             thrown if an error occurs
 	 * @throws InstantiationException
+	 *             thrown if an error occurs
 	 * @throws IllegalAccessException
+	 *             thrown if an error occurs
 	 * @throws IllegalArgumentException
+	 *             thrown if an error occurs
 	 * @throws InvocationTargetException
+	 *             thrown if an error occurs
 	 */
 	public static <T> T newInstance(final Class<T> objectClass) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		final Constructor<T> constructor;

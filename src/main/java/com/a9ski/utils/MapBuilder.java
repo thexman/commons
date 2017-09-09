@@ -1,3 +1,22 @@
+/*
+ * #%L
+ * Commons utilities
+ * %%
+ * Copyright (C) 2017 Kiril Arabadzhiyski
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package com.a9ski.utils;
 
 import java.util.HashMap;
@@ -126,6 +145,12 @@ public class MapBuilder<K, V, M extends Map<K, V>> {
 	 *
 	 * @param map
 	 *            the map used to store values
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
+	 * @param <M>
+	 *            map type
 	 * @return new map builder
 	 */
 	public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> create(final M map) {
@@ -139,6 +164,10 @@ public class MapBuilder<K, V, M extends Map<K, V>> {
 	 *            the key of the new entry
 	 * @param value
 	 *            the value of the new entry
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return new map builder for HashMap
 	 */
 	public static <K, V> MapBuilder<K, V, Map<K, V>> createMap(final K key, final V value) {
@@ -154,6 +183,13 @@ public class MapBuilder<K, V, M extends Map<K, V>> {
 	 *            the value of the new entry
 	 * @param mapFactory
 	 *            factory used to create the map
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
+	 * @param <M>
+	 *            map type
+	 *
 	 * @return new map builder for HashMap
 	 */
 	public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> createMap(final K key, final V value, final Supplier<M> mapFactory) {
@@ -167,6 +203,10 @@ public class MapBuilder<K, V, M extends Map<K, V>> {
 	 *            the key of the new entry
 	 * @param value
 	 *            the value of the new entry
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return new map builder for HashMap
 	 */
 	public static <K, V> MapBuilder<K, V, HashMap<K, V>> createHashMap(final K key, final V value) {
@@ -180,6 +220,10 @@ public class MapBuilder<K, V, M extends Map<K, V>> {
 	 *            the key of the new entry
 	 * @param value
 	 *            the value of the new entry
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return new map builder for TreeMap
 	 */
 	public static <K, V> MapBuilder<K, V, TreeMap<K, V>> createTreeMap(final K key, final V value) {
@@ -193,6 +237,10 @@ public class MapBuilder<K, V, M extends Map<K, V>> {
 	 *            the key of the new entry
 	 * @param value
 	 *            the value of the new entry
+	 * @param <K>
+	 *            key type
+	 * @param <V>
+	 *            value type
 	 * @return new map builder for LinkedHashMap
 	 */
 	public static <K, V> MapBuilder<K, V, LinkedHashMap<K, V>> createLinkedHashMap(final K key, final V value) {
