@@ -33,12 +33,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utilities for dealing with reflection
@@ -48,7 +48,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ReflectionUtils {
 
-	private static final Logger LOGGER = Logger.getLogger(ReflectionUtils.class.getName());
+	private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtils.class);
 
 	protected ReflectionUtils() {
 		super();
@@ -252,7 +252,7 @@ public class ReflectionUtils {
 					methods.addAll(Arrays.asList(c.getDeclaredMethods()).stream().filter(m -> m.isDefault()).collect(Collectors.toList()));
 				}
 			} catch (final SecurityException ex) {
-				LOGGER.log(Level.FINEST, "Cannot retrieve all method for class " + c, ex);
+				LOGGER.debug("Cannot retrieve all method for class " + c, ex);
 			}
 			if (c.getSuperclass() != null) {
 				methods.addAll(getAllMethods(c.getSuperclass()));
@@ -277,7 +277,7 @@ public class ReflectionUtils {
 		try {
 			fields.addAll(Arrays.asList(c.getDeclaredFields()));
 		} catch (final SecurityException ex) {
-			LOGGER.log(Level.FINEST, "Cannot retrieve all fields for class " + c, ex);
+			LOGGER.debug("Cannot retrieve all fields for class " + c, ex);
 		}
 		if (c.getSuperclass() != null) {
 			fields.addAll(getAllFields(c.getSuperclass()));
