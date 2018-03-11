@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.commons.lang3.time.FastTimeZone;
 import org.junit.Test;
 
 public class DateUtilsTest {
@@ -208,6 +209,14 @@ public class DateUtilsTest {
 
 		// System.out.println(d);
 
+	}
+
+	@Test
+	public void testFormatAndParse() throws Exception {
+		final Date d = new Date();
+		final String s = DateUtils.formatIsoDate(d, FastTimeZone.getGmtTimeZone());
+		Thread.sleep(100);
+		assertEquals(d, DateUtils.parseIsoDate(s, FastTimeZone.getGmtTimeZone()));
 	}
 
 }

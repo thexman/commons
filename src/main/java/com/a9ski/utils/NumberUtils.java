@@ -342,6 +342,26 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	}
 
 	/**
+	 * Converts string to {@link Long}. If the value cannot be parsed, returns defaultValue
+	 *
+	 * @param str
+	 *            string to be converted
+	 * @param defaultValue
+	 *            the defaultValue
+	 * @return {@link Long} parsed value or default value if string cannot be parsed
+	 */
+	public static Long parseLong(final String str, Long defaultValue) {
+		if (str == null) {
+			return defaultValue;
+		}
+		try {
+			return Long.parseLong(str);
+		} catch (final NumberFormatException nfe) {
+			return defaultValue;
+		}
+	}
+
+	/**
 	 * Converts number to {@link Long}. If the value is null, returns null
 	 *
 	 * @param n
@@ -396,6 +416,41 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	}
 
 	/**
+	 * Converts string to {@link Long}. If the value cannot be parsed, returns defaultValue
+	 *
+	 * @param str
+	 *            string to be converted
+	 * @param defaultValue
+	 *            the defaultValue
+	 * @return {@link Long} parsed value or default value if string cannot be parsed
+	 */
+	public static Integer parseInt(final String str, Integer defaultValue) {
+		if (str == null) {
+			return defaultValue;
+		}
+		try {
+			return Integer.parseInt(str);
+		} catch (final NumberFormatException nfe) {
+			return defaultValue;
+		}
+	}
+
+	/**
+	 * Converts number to {@link Integer}. If the value is null, returns null
+	 *
+	 * @param n
+	 *            number value
+	 * @return {@link Integer} value or null
+	 */
+	public static Integer toInt(final Number n) {
+		if (n != null) {
+			return n.intValue();
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * Converts double to int.
 	 *
 	 * @param d
@@ -431,6 +486,26 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 			return n.intValue();
 		} else {
 			return defaultVal;
+		}
+	}
+
+	/**
+	 * Converts string to {@link Double}. If the value cannot be parsed, returns defaultValue
+	 *
+	 * @param str
+	 *            string to be converted
+	 * @param defaultValue
+	 *            the defaultValue
+	 * @return {@link Double} parsed value or default value if string cannot be parsed
+	 */
+	public static Double parseDouble(final String str, Double defaultValue) {
+		if (str == null) {
+			return defaultValue;
+		}
+		try {
+			return Double.parseDouble(str);
+		} catch (final NumberFormatException nfe) {
+			return defaultValue;
 		}
 	}
 

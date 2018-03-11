@@ -39,6 +39,14 @@ public class Range<T> {
 	protected final T minValue;
 	protected final T maxValue;
 
+	@SuppressWarnings("unused")
+	private Range() {
+		// private constructor needed by jaxb
+		minValue = null;
+		maxValue = null;
+		cmp = null;
+	}
+
 	/**
 	 * Creates a new range with provided <tt>T</tt>'s absolute minValue, maxValue and comparator
 	 *
@@ -50,8 +58,11 @@ public class Range<T> {
 	 *            the comparator
 	 */
 	public Range(final T minValue, final T maxValue, final Comparator<T> cmp) {
+		NullUtils.checkNotNull(cmp, "Cmp value cannot be null");
 		this.cmp = cmp;
+		NullUtils.checkNotNull(minValue, "Min value cannot be null");
 		this.minValue = minValue;
+		NullUtils.checkNotNull(maxValue, "Max value cannot be null");
 		this.maxValue = maxValue;
 	}
 
@@ -81,6 +92,18 @@ public class Range<T> {
 	}
 
 	/**
+	 * Sets the range start value
+	 *
+	 * @param start
+	 *            the range start value
+	 * @return this value
+	 */
+	public Range<T> addStart(final T start) {
+		this.start = start;
+		return this;
+	}
+
+	/**
 	 * Gets the range end value
 	 *
 	 * @return end value
@@ -97,6 +120,18 @@ public class Range<T> {
 	 */
 	public void setEnd(final T end) {
 		this.end = end;
+	}
+
+	/**
+	 * Sets range end value
+	 *
+	 * @param end
+	 *            the end value
+	 * @return this value
+	 */
+	public Range<T> addEnd(final T end) {
+		this.end = end;
+		return this;
 	}
 
 	/**
@@ -225,35 +260,35 @@ public class Range<T> {
 	}
 
 	public static Range<Long> newLongRange() {
-		return new Range<Long>(Long.MIN_VALUE, Long.MAX_VALUE, new ComparableComparator<Long>());
+		return new Range<Long>(Long.MIN_VALUE, Long.MAX_VALUE, ComparableComparator.comparableComparator());
 	}
 
 	public static Range<Long> newLongRange(final Long start, final Long end) {
-		return new Range<Long>(new ComparableComparator<Long>(), start, end, Long.MIN_VALUE, Long.MAX_VALUE);
+		return new Range<Long>(ComparableComparator.comparableComparator(), start, end, Long.MIN_VALUE, Long.MAX_VALUE);
 	}
 
 	public static Range<Double> newDoubleRange() {
-		return new Range<Double>(Double.MIN_VALUE, Double.MAX_VALUE, new ComparableComparator<Double>());
+		return new Range<Double>(Double.MIN_VALUE, Double.MAX_VALUE, ComparableComparator.comparableComparator());
 	}
 
 	public static Range<Double> newDoubleRange(final Double start, final Double end) {
-		return new Range<Double>(new ComparableComparator<Double>(), start, end, Double.MIN_VALUE, Double.MAX_VALUE);
+		return new Range<Double>(ComparableComparator.comparableComparator(), start, end, Double.MIN_VALUE, Double.MAX_VALUE);
 	}
 
 	public static Range<Integer> newIntegerRange() {
-		return new Range<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, new ComparableComparator<Integer>());
+		return new Range<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, ComparableComparator.comparableComparator());
 	}
 
 	public static Range<Integer> newIntegerRange(final Integer start, final Integer end) {
-		return new Range<Integer>(new ComparableComparator<Integer>(), start, end, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		return new Range<Integer>(ComparableComparator.comparableComparator(), start, end, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 
 	public static <C extends Comparable<C>> Range<C> newRange(final C minValue, final C maxValue) {
-		return new Range<C>(minValue, maxValue, new ComparableComparator<C>());
+		return new Range<C>(minValue, maxValue, ComparableComparator.comparableComparator());
 	}
 
 	public static <C extends Comparable<C>> Range<C> newRange(final C start, final C end, final C minValue, final C maxValue) {
-		return new Range<C>(new ComparableComparator<C>(), start, end, minValue, maxValue);
+		return new Range<C>(ComparableComparator.comparableComparator(), start, end, minValue, maxValue);
 	}
 
 	/*

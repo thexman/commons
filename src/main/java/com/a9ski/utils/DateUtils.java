@@ -21,6 +21,7 @@ package com.a9ski.utils;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Calendar;
@@ -192,13 +193,31 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 */
 	public static String formatDate(final String pattern, final Date date, final TimeZone timeZone) throws IllegalArgumentException {
 		if (date != null && pattern != null) {
-			final DateFormat format = new SimpleDateFormat(pattern);
-			if (timeZone != null) {
-				format.setTimeZone(timeZone);
-			}
+			final DateFormat format = createSimpleDateFormatter(pattern, timeZone);
 			return format.format(date);
 		} else {
 			return "";
+		}
+	}
+
+	/**
+	 * Creates {@link SimpleDateFormat} with provided patter or returns null if the patter is null
+	 * 
+	 * @param pattern
+	 *            the patter
+	 * @param timeZone
+	 *            the time zone
+	 * @return {@link SimpleDateFormat} object
+	 */
+	public static SimpleDateFormat createSimpleDateFormatter(final String pattern, final TimeZone timeZone) {
+		if (pattern != null) {
+			final SimpleDateFormat format = new SimpleDateFormat(pattern);
+			if (timeZone != null) {
+				format.setTimeZone(timeZone);
+			}
+			return format;
+		} else {
+			return null;
 		}
 	}
 
@@ -215,6 +234,76 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 */
 	public static String formatIsoDate(final Date date, final TimeZone timeZone) throws IllegalArgumentException {
 		return formatDate(ISO_DATE_FORMAT, date, timeZone);
+	}
+
+	/**
+	 * Parses string to date using {@link #ISO_DATE_FORMAT} and <tt>timeZone</tt>. {@link ParseException} is thrown if the string cannot be parsed
+	 * 
+	 * @param date
+	 *            the string date to be parsed
+	 * @param timeZone
+	 *            the time zone
+	 * @return the parsed date
+	 * @throws ParseException
+	 *             if the string cannot be parsed
+	 */
+	public static Date parseIsoDate(final String date, final TimeZone timeZone) throws ParseException {
+		return parseDate(date, ISO_DATE_FORMAT, timeZone);
+	}
+
+	/**
+	 * Parses string to date using {@link #ISO_DATE_FORMAT} and <tt>timeZone</tt>. {@link ParseException} is thrown if the string cannot be parsed
+	 * 
+	 * @param date
+	 *            the string date to be parsed
+	 * @param timeZone
+	 *            the time zone
+	 * @return the parsed date
+	 * @throws ParseException
+	 *             if the string cannot be parsed
+	 */
+	public static Date parseIsoDate(final String date, final TimeZone timeZone, final Date defaultValue) throws ParseException {
+		return parseDate(date, ISO_DATE_FORMAT, timeZone, defaultValue);
+	}
+
+	/**
+	 * Parses string to date using <tt>pattern</tt> and <tt>timeZone</tt>. If the string cannot be parsed a <tt>defaultValue</tt> is returned
+	 * 
+	 * @param date
+	 *            the string date to be parsed
+	 * @param pattern
+	 *            the pattern
+	 * @param timeZone
+	 *            the time zone
+	 * @param defaultValue
+	 *            default value returned in case the string is not parsable
+	 * @return the parsed date or default value
+	 */
+	public static Date parseDate(final String date, final String pattern, final TimeZone timeZone) throws ParseException {
+		final DateFormat dateFormat = createSimpleDateFormatter(pattern, timeZone);
+		return dateFormat.parse(date);
+	}
+
+	/**
+	 * Parses string to date using <tt>pattern</tt> and <tt>timeZone</tt>. If the string cannot be parsed a <tt>defaultValue</tt> is returned
+	 * 
+	 * @param date
+	 *            the string date to be parsed
+	 * @param pattern
+	 *            the pattern
+	 * @param timeZone
+	 *            the time zone
+	 * @param defaultValue
+	 *            default value returned in case the string is not parsable
+	 * @return the parsed date or default value
+	 */
+	public static Date parseDate(final String date, final String pattern, final TimeZone timeZone, final Date defaultValue) {
+		try {
+			final DateFormat dateFormat = createSimpleDateFormatter(pattern, timeZone);
+			return dateFormat.parse(date);
+		} catch (final ParseException ex) {
+			return defaultValue;
+		}
 	}
 
 	/**

@@ -158,6 +158,10 @@ public class NumberUtilsTest {
 	public void testToLongNumber() {
 		assertEquals(Long.valueOf(1L), NumberUtils.toLong(Double.valueOf(1D)));
 		assertNull(NumberUtils.toLong((Number) null));
+
+		assertEquals(Long.valueOf(1L), NumberUtils.parseLong("1", null));
+		assertEquals(Long.valueOf(1L), NumberUtils.parseLong("2X", Long.valueOf(1L)));
+		assertNull(NumberUtils.parseLong("aaaa", null));
 	}
 
 	@Test
@@ -196,6 +200,10 @@ public class NumberUtilsTest {
 	public void testToDoubleNumber() {
 		assertEquals(Double.valueOf(1L), NumberUtils.toDouble(Long.valueOf(1)));
 		assertNull(NumberUtils.toDouble((Number) null));
+
+		assertEquals(Double.valueOf(1L), NumberUtils.parseDouble("1", null));
+		assertEquals(Double.valueOf(1L), NumberUtils.parseDouble("2X", Double.valueOf(1L)));
+		assertNull(NumberUtils.parseDouble("aaaa", null));
 	}
 
 	@Test
