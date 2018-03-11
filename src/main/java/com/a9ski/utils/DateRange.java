@@ -19,6 +19,7 @@
  */
 package com.a9ski.utils;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import org.apache.commons.collections4.comparators.ComparableComparator;
@@ -40,12 +41,57 @@ public class DateRange extends Range<Date> {
 	private static final Date MIN_DATE = new Date(0);
 	private static final Date MAX_DATE = new Date(Long.MAX_VALUE);
 
+	/**
+	 * Creates a new object with minDate = {@link #MIN_DATE} and maxDate = {@link #MAX_DATE}
+	 */
 	public DateRange() {
 		super(MIN_DATE, MAX_DATE, new ComparableComparator<Date>());
 	}
 
+	/**
+	 * Creates a new object with minDate = {@link #MIN_DATE} and maxDate = {@link #MAX_DATE} and provided <tt>start</tt> and <tt>end</tt> dates
+	 * 
+	 * @param start
+	 *            the start date
+	 * @param end
+	 *            the end date
+	 */
 	public DateRange(final Date start, final Date end) {
-		super(new ComparableComparator<Date>(), start, end, MIN_DATE, MAX_DATE);
+		this(start, end, MIN_DATE, MAX_DATE);
+	}
+
+	/**
+	 * Creates a new object with provided <tt>start</tt>, <tt>end</tt>, <tt>start</tt>, <tt>end</tt> dates
+	 * 
+	 * @param start
+	 *            the start date
+	 * @param end
+	 *            the end date
+	 * @param minDate
+	 *            the absolute min date
+	 * @param maxDate
+	 *            the absolute max date
+	 */
+	public DateRange(final Date start, final Date end, Date minDate, Date maxDate) {
+		this(new ComparableComparator<Date>(), start, end, minDate, maxDate);
+	}
+
+	/**
+	 * Creates a new object with provided <tt>start</tt>, <tt>end</tt>, <tt>start</tt>, <tt>end</tt> dates and comparator
+	 * 
+	 * @param cmp
+	 *            date comparator
+	 * @param start
+	 *            the start date
+	 * @param end
+	 *            the end date
+	 * @param minDate
+	 *            the absolute min date
+	 * @param maxDate
+	 *            the absolute max date
+	 */
+	public DateRange(final Comparator<Date> cmp, final Date start, final Date end, Date minDate, Date maxDate) {
+		super(cmp, start, end, minDate, maxDate);
 	}
 
 	/**
